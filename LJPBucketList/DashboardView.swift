@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct DashboardView: View {
 
     var body: some View {
 		NavigationStack {
@@ -97,5 +97,5 @@ struct MenuButton: View {
 }
 
 #Preview {
-    ContentView()
+	DashboardView()
 }
