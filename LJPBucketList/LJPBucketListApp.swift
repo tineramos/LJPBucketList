@@ -23,7 +23,7 @@ struct LJPBucketListApp: App {
 
     var body: some Scene {
         WindowGroup {
-			DashboardView()
+			MenuTabView()
         }
         .modelContainer(sharedModelContainer)
     }
