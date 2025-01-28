@@ -8,12 +8,26 @@ struct MenuTabView: View {
 		case extras
 	}
 	
+	@State var selectedTab: TabItem = .dashboard
+	
     var body: some View {
-		VStack {
-			Text("")
+		TabView(selection: $selectedTab) {
+			ForEach(TabItem.allCases, id: \.self) { item in
+				createTabItem(for: item)
+			}
+			.toolbarBackground(.tabBarBackground, for: .tabBar)
+			.toolbarBackgroundVisibility(.visible, for: .tabBar)
 		}
     }
 
+	@ViewBuilder
+	private func createTabItem(for item: TabItem) -> some View {
+		item.contentView
+			.tabItem {
+				Image(item.image)
+				Text(item.title)
+			}
+	}
 }
 
 private extension MenuTabView.TabItem {
@@ -40,6 +54,29 @@ private extension MenuTabView.TabItem {
 		}
 	}
 	
+	@ViewBuilder
+	var contentView: some View {
+		switch self {
+		case .dashboard:
+			DashboardView()
+		case .gallery:
+			GalleryView()
+		case .extras:
+			ExtrasView()
+		}
+	}
+}
+
+struct GalleryView: View {
+	var body: some View {
+		Text("GalleryView")
+	}
+}
+
+struct ExtrasView: View {
+	var body: some View {
+		Text("ExtrasView")
+	}
 }
 
 #Preview {
