@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MenuTabView: View {
 	
-	enum TabItems: Int, CaseIterable {
+	enum TabItem: Int, CaseIterable {
 		case dashboard = 0
 		case gallery
 		case extras
@@ -16,7 +16,7 @@ struct MenuTabView: View {
 
 }
 
-extension MenuTabView.TabItems {
+private extension MenuTabView.TabItem {
 	
 	var title: LocalizedStringResource {
 		switch self {
