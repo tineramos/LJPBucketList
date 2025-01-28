@@ -15,8 +15,7 @@ struct MenuTabView: View {
 			ForEach(TabItem.allCases, id: \.self) { item in
 				createTabItem(for: item)
 			}
-			.toolbarBackground(.tabBarBackground, for: .tabBar)
-			.toolbarBackgroundVisibility(.visible, for: .tabBar)
+			.toolbarBackground(.visible, for: .tabBar)
 		}
     }
 
