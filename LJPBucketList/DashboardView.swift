@@ -16,71 +16,31 @@ struct DashboardView: View {
 			GeometryReader { proxy in
 				
 				ZStack {
-					LinearGradient(gradient: Gradient(colors: [.dashboardBackground, .white]),
-								   startPoint: .top,
-								   endPoint: .bottom)
-					.ignoresSafeArea()
+					gradientBackground
 					
 					VStack {
-						HStack {
-							Image(.bucket)
-							Image(.ljpBucketListLogo)
-							Spacer()
-						}
-						.padding(.horizontal, 24)
-						
-						logoSection
-							.frame(height: proxy.size.height / 2)
-
-						menuButton
-							.padding()
+						logoHeader
+						Spacer()
 					}
 				}
 			}
 		}
     }
 	
-	private var logoSection: some View {
-		
-		VStack(alignment: .center) {
-			
-			Spacer()
-			
-			Image(.logo)
-				.resizable()
-				.aspectRatio(contentMode: .fit)
-			
-			Spacer()
-		}
-//		.background(Color.accentColor)
-		
+	private var gradientBackground: some View {
+		LinearGradient(gradient: Gradient(colors: [.dashboardBackground, .white]),
+					   startPoint: .top,
+					   endPoint: .bottom)
+		.ignoresSafeArea()
 	}
 	
-	private var menuButton: some View {
-		
-		VStack(spacing: 20) {
-			
-			Spacer()
-			
-			MenuButton(title: "LIST", action: showList)
-			MenuButton(title: "COMPLETED", action: showCompleted)
-			MenuButton(title: "INSTAGRAM REELS", action: showInstagram)
-			
+	private var logoHeader: some View {
+		HStack {
+			Image(.bucket)
+			Image(.ljpBucketListLogo)
 			Spacer()
 		}
-		
-	}
-	
-	private func showList() {
-		
-	}
-	
-	private func showCompleted() {
-		
-	}
-	
-	private func showInstagram() {
-		
+		.padding(.horizontal, 24)
 	}
 }
 
