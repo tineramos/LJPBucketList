@@ -36,8 +36,8 @@ struct DashboardView: View {
 	
 	private var logoHeader: some View {
 		HStack {
-			Image(.bucket)
-			Image(.ljpBucketListLogo)
+			Image(.Dashboard.bucket)
+			Image(.Dashboard.ljpBucketListLogo)
 			Spacer()
 		}
 		.padding(.horizontal, 24)

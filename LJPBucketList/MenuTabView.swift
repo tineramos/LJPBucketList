@@ -45,11 +45,11 @@ private extension MenuTabView.TabItem {
 	var image: ImageResource {
 		switch self {
 		case .dashboard:
-				.menuDashboardIcon
+				.Menu.dashboard
 		case .gallery:
-				.menuGalleryIcon
+				.Menu.gallery
 		case .extras:
-				.menuExtrasIcon
+				.Menu.extras
 		}
 	}
 	
