@@ -18,8 +18,14 @@ struct DashboardView: View {
 				ZStack {
 					gradientBackground
 					
-					VStack {
+					VStack(spacing: 16) {
 						logoHeader
+						
+						Image(.Dashboard.cover)
+							.resizable()
+							.frame(alignment: .center)
+							.aspectRatio(contentMode: .fit)
+						
 						Spacer()
 					}
 				}
