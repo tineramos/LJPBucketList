@@ -20,11 +20,7 @@ struct DashboardView: View {
 					
 					VStack(spacing: 16) {
 						logoHeader
-						
-						Image(.Dashboard.cover)
-							.resizable()
-							.frame(alignment: .center)
-							.aspectRatio(contentMode: .fit)
+						coverImage
 						
 						Spacer()
 					}
@@ -47,6 +43,13 @@ struct DashboardView: View {
 			Spacer()
 		}
 		.padding(.horizontal, 24)
+	}
+	
+	private var coverImage: some View {
+		Image(.Dashboard.cover)
+			.resizable()
+			.frame(alignment: .center)
+			.aspectRatio(contentMode: .fit)
 	}
 }
 
