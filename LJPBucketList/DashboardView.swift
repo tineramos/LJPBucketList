@@ -15,12 +15,26 @@ struct DashboardView: View {
 			
 			GeometryReader { proxy in
 				
-				VStack {
-					logoSection
-						.frame(height: proxy.size.height / 2)
+				ZStack {
+					LinearGradient(gradient: Gradient(colors: [.dashboardBackground, .white]),
+								   startPoint: .top,
+								   endPoint: .bottom)
+					.ignoresSafeArea()
+					
+					VStack {
+						HStack {
+							Image(.bucket)
+							Image(.ljpBucketListLogo)
+							Spacer()
+						}
+						.padding(.horizontal, 24)
+						
+						logoSection
+							.frame(height: proxy.size.height / 2)
 
-					menuButton
-						.padding()
+						menuButton
+							.padding()
+					}
 				}
 			}
 		}
@@ -28,7 +42,7 @@ struct DashboardView: View {
 	
 	private var logoSection: some View {
 		
-		VStack {
+		VStack(alignment: .center) {
 			
 			Spacer()
 			
@@ -38,7 +52,7 @@ struct DashboardView: View {
 			
 			Spacer()
 		}
-		.background(Color.accentColor)
+//		.background(Color.accentColor)
 		
 	}
 	
