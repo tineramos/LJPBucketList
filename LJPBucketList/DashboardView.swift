@@ -47,8 +47,8 @@ struct DashboardView: View {
 	}
 
 	private let fixedColumn = [
-		GridItem(.fixed(gridItemSize), spacing: gridItemSpacing),
-		GridItem(.fixed(gridItemSize), spacing: gridItemSpacing)
+		GridItem(.flexible(), spacing: gridItemSpacing),
+		GridItem(.flexible(), spacing: gridItemSpacing)
 	]
 
     var body: some View {
@@ -94,13 +94,17 @@ struct DashboardView: View {
 	}
 	
 	private func contentActions(width: CGFloat) -> some View {
-		ScrollView {
+		
+		let gridItemSize: CGFloat = (width - (gridItemSpacing * 2)) / 2
+		
+		return ScrollView {
 			LazyVGrid(columns: fixedColumn, alignment: .center, spacing: gridItemSpacing) {
 				ForEach(Menu.allCases, id: \.self) { item in
-					MenuButton(menuItem: item)
+					MenuButton(menuItem: item, size: gridItemSize)
 				}
 			}
 			.frame(maxWidth: .infinity)
+			.padding(.horizontal, gridItemSpacing)
 		}
 		.scrollBounceBehavior(.basedOnSize)
 	}
@@ -114,6 +118,7 @@ struct MenuButton: View {
 	}
 	
 	let menuItem: DashboardView.Menu
+	let size: CGFloat
 	
 //	let title: String
 //	let action: () -> Void
@@ -137,7 +142,7 @@ struct MenuButton: View {
 					.font(.title2.bold())
 			}
 		}
-		.frame(width: gridItemSize, height: gridItemSize)
+		.frame(minWidth: size, minHeight: size)
 		.background(
 			LinearGradient(
 				stops: [
