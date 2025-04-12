@@ -1,14 +1,19 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-
     "Dashboard" : {
 
     },
     "Extras" : {
 
     },
+    "ExtrasView" : {
+
+    },
     "Gallery" : {
+
+    },
+    "GalleryView" : {
 
     }
   },
