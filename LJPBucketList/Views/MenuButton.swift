@@ -2,17 +2,24 @@ import SwiftUI
 
 struct MenuButton: View {
 
-	enum ValueType: Hashable {
+	enum SubtitleType: Hashable {
 		case text(String)
 		case image(ImageResource)
 	}
 
-	struct ViewModel: Hashable {
+	struct Model: Hashable {
 		let title: String
-		let value: ValueType
+		let subtitle: SubtitleType
+		let accessibilityLabel: String?
+		
+		init(title: String, subtitle: SubtitleType, accessibilityLabel: String? = nil) {
+			self.title = title
+			self.subtitle = subtitle
+			self.accessibilityLabel = accessibilityLabel
+		}
 	}
 	
-	let viewModel: ViewModel
+	let model: Model
 	let size: CGFloat
 
 //	let action: () -> Void
@@ -22,17 +29,19 @@ struct MenuButton: View {
 			print("TINE")
 		}) {
 			VStack {
-				switch viewModel.value {
+				switch model.subtitle {
 				case .text(let string):
 					Text(string)
 						.foregroundStyle(Color.textBlackForeground)
 						.font(.largeTitle.bold())
 						.padding(.bottom, 8)
+
 				case .image(let imageResource):
 					Image(imageResource)
 						.foregroundStyle(Color.textGreenForeground)
 				}
-				Text(viewModel.title)
+
+				Text(model.title)
 					.font(.title2.bold())
 			}
 		}
@@ -53,5 +62,7 @@ struct MenuButton: View {
 				.inset(by: 0.5)
 				.stroke(Color.white, lineWidth: 0.2)
 		)
+		.accessibilityElement(children: .combine)
+		.accessibilityLabel(model.accessibilityLabel ?? model.title)
 	}
 }

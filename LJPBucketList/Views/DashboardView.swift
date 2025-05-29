@@ -72,6 +72,9 @@ struct DashboardView: View {
 			Spacer()
 		}
 		.padding(.horizontal, 24)
+		.accessibilityElement(children: .combine) // or ignore
+		.accessibilityAddTraits(.isImage)
+		.accessibilityLabel("LJP BucketList Logo")
 	}
 	
 	private var coverImage: some View {
@@ -79,25 +82,28 @@ struct DashboardView: View {
 			.resizable()
 			.frame(alignment: .center)
 			.aspectRatio(contentMode: .fit)
+			.accessibilityLabel("LJP BucketList Cover Logo")
 	}
 	
 	private func contentActions(width: CGFloat) -> some View {
 		
 		let gridItemSize: CGFloat = (width - (gridItemSpacing * 2)) / 2
 
-		let menuItems: [MenuButton.ViewModel] = [.init(title: Item.bucketList.title,
-													   value: .text(viewModel.totalBucketlistCountFormatted)),
-												 .init(title: Item.completed.title,
-													   value: .text(viewModel.totalCompletedCountFormatted)),
-												 .init(title: Item.rules.title,
-													   value: .image(.Dashboard.rulesIcon)),
-												 .init(title: Item.instagram.title,
-													   value: .image(.Dashboard.instagramIcon))]
-		
+		let menuItems: [MenuButton.Model] = [.init(title: Item.bucketList.title,
+												   subtitle: .text(viewModel.totalBucketlistCountFormatted),
+												   accessibilityLabel: totalBucketListCountAccessibilityLabel),
+											 .init(title: Item.completed.title,
+												   subtitle: .text(viewModel.totalCompletedCountFormatted),
+												   accessibilityLabel: totalCompletedCountAccessibilityLabel),
+											 .init(title: Item.rules.title,
+												   subtitle: .image(.Dashboard.rulesIcon)),
+											 .init(title: Item.instagram.title,
+												   subtitle: .image(.Dashboard.instagramIcon))]
+
 		return ScrollView {
 			LazyVGrid(columns: fixedColumn, alignment: .center, spacing: gridItemSpacing) {
 				ForEach(menuItems, id: \.self) { item in
-					MenuButton(viewModel: item, size: gridItemSize)
+					MenuButton(model: item, size: gridItemSize)
 				}
 			}
 			.frame(maxWidth: .infinity)
@@ -105,6 +111,20 @@ struct DashboardView: View {
 			.redacted(reason: viewModel.isLoading ? .placeholder : [])
 		}
 		.scrollBounceBehavior(.basedOnSize)
+	}
+	
+	private var totalBucketListCountAccessibilityLabel: String {
+		guard let info = viewModel.dashboardInfo else {
+			return "No BucketList items"
+		}
+		return "\(info.bucketListItemCount) BucketList items"
+	}
+	
+	private var totalCompletedCountAccessibilityLabel: String {
+		guard let info = viewModel.dashboardInfo else {
+			return "No Completed items"
+		}
+		return "\(info.completedItemCount) Completed items"
 	}
 }
 
